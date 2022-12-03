@@ -1,0 +1,139 @@
+body{
+    margin: 0;
+    background-image: url(image/backgraound.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;     /*현재 웹창의 크기에 맞도록(가로)*/
+
+}
+.container{
+    background-color: aliceblue;
+    min-height: 60vw;   /*세로 크기*/
+    box-shadow: black;
+    border-top: 10px solid blanchedalmond;  /*컨테이너 상단*/
+    border-bottom: 10px solid blanchedalmond;   /*컨테이너 하단*/
+    height: 100%;
+    min-height: 100vw;
+
+}
+.input-area {
+    position: relative;
+}
+.task-input {
+    transition: padding-top 0.2 ease, margin-top 0.2 ease;
+    width: 80%;
+    border: none;
+    border: 1px solid blanchedalmond;
+}
+.task-input:focus {     /*일 입력 창이 클릭되면 밑으로 넓어진다. 애니메이션 추가 색상은 바텀에만 준다.*/
+    outline: none;
+    border-bottom: 3px solid blanchedalmond;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    transition: 0.5s;
+    padding-top: 35px;
+}
+.task-input + label > span {        /*ease 란 애니메이션 효과가 어떻게 시작되는것에 따른지 천천히 시작or 천천히 종료 등 시작과 종료 시점의 설정*/
+    font-weight: 300;               /*span을 인풋 위치로 합친다. 라벨에 효과를 덧붙힌다.*/
+    margin: 0;
+    position: absolute;
+    color: rgb(240, 190, 114);
+    font-size: 14px;
+    top: 6px;
+    left: 10px;
+    -webkit-transition: top 0.2s ease, color 0.2s ease;
+    transition: top 0.2s ease, font size 0.2 ease, color 0.2s ease;
+}
+.task-input:focus + label > span {  /*클릭되고 난 후 span input의 위치와 색상*/
+    top: 0px;
+    color: #333;
+}
+.button-add { /*추가버튼의 디자인*/
+    border: none;
+    background-color: blanchedalmond;
+    box-shadow: rgba(0, 0,0,0.02) 0 1px 3px 0;
+}
+
+.button-add:hover {     /*마우스를 올렸을때 변화되는 색상*/
+    background-color: cadetblue;
+}
+.button-add:active {       /*버튼을 눌렸을 때의 상태(액티브)*/
+    background-color: #f3f4f6;
+    box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
+    0px 1px 1px rgba(81, 41, 10, 0.15);;
+    transform: translateY(0.125rem);    /*버튼이 클릭되었을때 약간의 액션을 준다 0.125rem 만큼 밑으로 살짝 내려 애니메이션 효과를 만든다.*/
+}
+/*////////////////////////////////////탭 컨테이너 구간////////////////////////////////////////////*/
+.task-list-container {
+    border: 1px solid lightgray;    /*테두리를 그린다.*/
+    margin-top: 1em;    /*input 창과의 거리를 둔다*/
+    position: relative; /*위치를 상대적으로 포지션시킨다.*/
+}
+.tab-type {
+    display: flex;
+    border-bottom: 1px solid lightgray; /*하단줄에 선을 주어 포인트를 준다.*/
+}
+.tab-type div{
+    display: flex;  /*탭의 카테고리 위치를 가로로 정렬한다.*/
+    padding: 1em;   /*탭의 굵기를 설정*/
+    cursor: pointer;    /*커서를 올리면 포인터로 변경시킨다.*/
+}
+#tab-underline{
+    background-color: lightcoral;
+    height: 4px !important;
+    position: absolute;
+    top: 52px;
+    left: 0px;
+    width: 48px;
+    transition: 0.5s; 
+    padding: 0px;
+}
+.task {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    position: relative;
+}
+.task span {
+    padding: 1em;
+}
+.button-box{
+    display: flex;
+}
+.button-box button {
+    height: 100%;
+    border: none;
+    width: 5em;
+    margin: 0;
+    background-color: lightgray;
+    transition: 0.5s;
+}
+
+.button-box button :active {
+    position: relative;
+    top: 2px;
+  }
+  
+  .button-box button:first-child:hover {
+    background-color: greenyellow;
+  }
+  .button-box button:nth-child(2):hover {
+    background-color: rgb(255, 0, 0, 0.3);
+  }
+  
+
+.task-done {
+    text-decoration: line-through;
+    background-color: lightgray;
+    transition: 0.5s;
+}
+.fa-trash{  /*쓰레기통 아이콘 색상 변경*/
+    color: red;
+}
+.fa-check {
+    color: limegreen;
+}
+.fa-rotate-left {
+    color: lightslategray;
+}
