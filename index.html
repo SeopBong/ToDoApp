@@ -12,27 +12,31 @@
 </head>
 <body>
     <section class="container">
-        <h1>Todo List</h1>
+        <h1 >Todo List</h1>
+        
         <div class="input-area">
             <input type="text" class="task-input">
-            <label for="task-label"><span>오늘 웤은?</span></label>
+            <label for="task-label"><span>오늘 할 일을 입력해주세요</span></label>
             <button class="button-add" type="button">+</button>
+            <div id="clock" onload="currentTime()">
+            </div>
         </div>
         <section class="task-list-container">
             <div class="tab-type">
                 <div id="tab-underline"></div>
-                    <div id="tab-all">
-                        All
-                    </div>
-                    <div id="tab-not-done">
-                        not Done
-                    </div>
-                    <div id="tab-done">
-                        Done
-                    </div>
+                <div id="tab-all">
+                    All
+                </div>
+                <div id="tab-not-done">
+                    not Done
+                </div>
+                <div id="tab-done">
+                    Done
+                </div>
             </div>
             <div id="task-board">
             </div>
+            
         </section>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

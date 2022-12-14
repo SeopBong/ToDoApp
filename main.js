@@ -6,6 +6,7 @@ let taskList = [];
 let selectedMenu = "tab-all";
 let filteredList = [];
 
+
 addButton.addEventListener("mousedown", addTask);
 userInput.addEventListener("keyup", function (e) {
   if (e.keyCode === 13) {
@@ -25,38 +26,41 @@ function addTask() {
     content: taskValue,
     isComplete: false,
     id: randomIDGenerator(),
+    endTime: '',         // 해당 시간 요소 추가
   };
-
   taskList.push(task);
   userInput.value = "";
+
   render();
 }
 
 function render() {
     let result ="";
     let list = [];
+
     if(selectedMenu === "tab-all"){
         list = taskList;
     }else {
         list = filteredList;
     }
-// }else if(mode == "ongoing" || mode == "done"){
-//     list = filterList;
-// }
     for(let i =0; i < list.length; i++){
         if(list[i].isComplete){
             result +=`<div class="task task-done" id="${list[i].id}">
                 <span>${list[i].content}</span>
+                <span id="nonePlate">${list[i].endTime+" 종료"}</span>
+
                 <div class="button-box">
-                <button onclick="('${list[i].id}')"><i class="fa-solid fa-rotate-left"></i></button>
+                <button onclick="toggleDone('${list[i].id}')"><i class="fa-solid fa-rotate-left"></i></button>
                 <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>`
         }else{
         result += `<div class="task" id="${list[i].id}">
             <span>${list[i].content}</span>
+            <span>${list[i].endTime}</span>
+
             <div class="button-box">
-            <button onclick="toggleDone('${list[i].id}')"><i class="fa-solid fa-check"></i></button>   
+            <button onclick="toggleDone('${list[i].id}')"><i class="fa-solid fa-check"></i></button>  
             <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>`;
@@ -68,7 +72,14 @@ function render() {
 function toggleDone(id) {
   for (let i = 0; i < taskList.length; i++) {
     if (taskList[i].id === id) {
+      if(!taskList[i].isComplete) {
+       taskList[i].endTime = currentTime(); 
+      }
+      else {
+        taskList[i].endTime = '';
+      }
       taskList[i].isComplete = !taskList[i].isComplete;
+      
       break;
     }
   }
@@ -106,6 +117,32 @@ function filter(e) {
   }
   render();
 }
+
+function currentTime(){
+    let today = new Date();
+    let hh = today.getHours();
+    let mm = today.getMinutes();
+    let ss = today.getSeconds();
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
+    let session = "AM ";
+    if(hh==0){
+        hh = 12;
+    }
+    if(hh>12){
+        hh = hh -12;
+        session = "PM ";
+    }
+    hh = (hh < 10) ? "0" + hh: hh;
+    mm = (mm < 10) ? "0" + mm: mm;
+    ss = (ss < 10) ? "0" + ss: ss;
+    let time = year +"년 " + month +"월 "+ date +"일 " + hh + ":" + mm + ":" + ss + ":" + session;
+    document.getElementById("clock").innerText = time;
+    let t = setTimeout(function(){ currentTime() }, 1000);
+    return time;
+}
+currentTime();
 
 function randomIDGenerator() {
   // Math.random should be unique because of its seeding algorithm.
